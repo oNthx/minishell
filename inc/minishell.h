@@ -1,4 +1,16 @@
-#ifndef	MINISHELL_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bozgur <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/24 14:11:57 by bozgur            #+#    #+#             */
+/*   Updated: 2022/08/24 14:12:07 by bozgur           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef MINISHELL_H
 # define MINISHELL_H
 
 # include <signal.h>
@@ -20,6 +32,19 @@ typedef struct	s_env
 	char			*fullstr;
 	struct s_env	*next;
 }	t_env;
+
+typedef struct	s_process
+{
+	pid_t				pid;
+	char				*name;
+	char				*path;
+	char				*args;
+	t_env				*env;
+	t_stdfd				stdfd;
+	t_redirect			*redirect;
+	struct s_process	*next;
+	struct s_process	*prev;
+}						t_process;
 
 /*
 ************************DATA_STRUCTS**********************

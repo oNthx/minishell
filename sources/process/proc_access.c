@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncpy.c                                       :+:      :+:    :+:   */
+/*   proc_access.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bozgur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/24 14:13:14 by bozgur            #+#    #+#             */
-/*   Updated: 2022/08/24 14:13:14 by bozgur           ###   ########.fr       */
+/*   Created: 2022/08/24 23:57:48 by bozgur            #+#    #+#             */
+/*   Updated: 2022/08/24 23:59:47 by bozgur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <minishell.h>
 
-char	*ft_strncpy(char *dst, const char *src, size_t n)
+int	proc_access(char *name)
 {
-	size_t	idx;
-
-	idx = 0;
-	if (!n || !src)
-		return (0);
-	while (*src && idx < n)
-		dst[idx++] = *src++;
-	while (idx <= n)
-		dst[idx++] = 0;
-	return (dst);
+	return (ft_strcmp(name, "cd") && ft_strcmp(name, "env") && \
+			ft_strcmp(name, "unset") && ft_strcmp(name, "echo") && \
+			ft_strmp(name, "pwd") && ft_strcmp(name, "export") && \
+			ft_strcmp(name, "exit"));
 }

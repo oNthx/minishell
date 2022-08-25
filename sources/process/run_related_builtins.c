@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncpy.c                                       :+:      :+:    :+:   */
+/*   run_related_builtins.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bozgur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/24 14:13:14 by bozgur            #+#    #+#             */
-/*   Updated: 2022/08/24 14:13:14 by bozgur           ###   ########.fr       */
+/*   Created: 2022/08/25 00:37:46 by bozgur            #+#    #+#             */
+/*   Updated: 2022/08/25 00:40:00 by bozgur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <minishell.h>
 
-char	*ft_strncpy(char *dst, const char *src, size_t n)
+int	run_related_builtins(t_process *process, int pipes[2])
 {
-	size_t	idx;
-
-	idx = 0;
-	if (!n || !src)
-		return (0);
-	while (*src && idx < n)
-		dst[idx++] = *src++;
-	while (idx <= n)
-		dst[idx++] = 0;
-	return (dst);
+	close(pipes[0]);
+	close(pipes[1]);
+	if (!ft_strcmp(process->name, "cd"))
+		cd(process);
+	else if (!ft_strcmp(process->name, "exit"))
+		ft_exit(process);
+	else if (!ft_strcmp(process->name, "unset"))
+		unset(process);
+	else
+		export(process);
+	return (0);
 }
