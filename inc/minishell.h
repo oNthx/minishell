@@ -5,73 +5,70 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bozgur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/24 14:11:57 by bozgur            #+#    #+#             */
-/*   Updated: 2022/08/24 14:12:07 by bozgur           ###   ########.fr       */
+/*   Created: 2022/08/27 10:22:39 by bozgur            #+#    #+#             */
+/*   Updated: 2022/08/28 15:14:40 by bozgur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
+#ifndef	MINISHELL_H
 # define MINISHELL_H
 
-# include <signal.h>
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <readline/history.h>
+# include <sys/wait.h>
 # include <readline/readline.h>
-# include "../libft/sources/libft.h"
+# include <readline/history.h>
+
+# include <libft.h>
 
 /*
-**************************STRUCTS*************************
+****************************STRUCTS*****************************
 */
-
-typedef struct	s_env
+//**********************ENV************************
+typedef struct s_envp
 {
 	char			*key;
 	char			*value;
 	char			*fullstr;
-	struct s_env	*next;
-}	t_env;
-
-typedef struct	s_process
+	struct s_envp	*next;
+}					t_envp;
+//********************PROCESS**********************
+typedef struct s_process
 {
 	pid_t				pid;
 	char				*name;
 	char				*path;
-	char				*args;
-	t_env				*env;
-	t_stdfd				stdfd;
+	char				**args;
+	t_envp				*envp;
+	t_stdfd				*stdfd;
 	t_redirect			*redirect;
 	struct s_process	*next;
 	struct s_process	*prev;
 }						t_process;
+/*
+****************************BUILTIN***************************
+*/
+char	*pwd();
+void	unset(t_process *head_ref);
 
 /*
-************************DATA_STRUCTS**********************
+****************************DATA_STRUCT*************************
 */
-/*****ENV*****/
-static char	*envl_join(char *key, char *value);
-static int	envcmp(char *s1, char *s2);
-t_env		*construct(char **envp);
-t_env		*envpnew(char *str);
-void		update_envp(char *key, char *value, t_env *envl);
-void		envpadd_back(t_env **lst, t_env *new);
-void		envpclear(t_env *envl);
-void		envpdelone(t_env *lst, void (*del)(void *));
-void		setenv(t_process *process);
-int		envpsize(t_env *lst);
-char		*getenv(char *name, t_env *envl);
+//**********************ENVP_DATA*******************
+void	envp_add_back(t_envp **lst, t_envp *new);
+void	envp_add_front(t_envp **lst, t_envp *new);
+void	envp_delone(t_envp *envp, void (*del)(void *));
+void	envp_clear(t_envp *envl);
+t_envp	*envp_new(char *str);
+int		envp_size(t_envp *envl);
+void	set_env(t_process *process);
+t_envp	*get_env(char **envl, t_envp *data);
 
 /*
-***********************COMMANDS***************************
+******************************SOURCES**************************
 */
-void	env(char **envp);
-void	cd(char **line);
-void	pwd();
-
-/*
-**************************PARSER**************************
-*/
-void	free_split(char **line);
+int	contains_char(char *str, char c);
+int	check_env(char *env_name);
 
 #endif

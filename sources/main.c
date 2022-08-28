@@ -1,26 +1,35 @@
-#include "../inc/minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bozgur <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/27 15:17:29 by bozgur            #+#    #+#             */
+/*   Updated: 2022/08/28 15:14:06 by bozgur           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int	main(int argc, char **argv, char **envp)
+#include <minishell.h>
+
+int	main(int argc, char **argv, char **envl)
 {
-	char	*line;
-	char	**lines;
+	t_envp		*data;
+	t_process	*proc;
 
-	while (1)
+	printf("here i'm\n");
+	argc = (int)argc;
+	argv = (char **)argv;
+	proc = malloc(sizeof(t_process));
+	data = malloc(sizeof(t_envp));
+	proc->envp = data;
+	printf("here i'm\n");
+	get_env(envl, data);
+	printf("here i'm\n");
+	printf("data->key %s\n", data->key);
+	if (ft_strcmp(data->key, "PWD") == 0)
 	{
-		line = readline("Minishell$ ");
-		if (!line)
-			continue ;
-		lines = ft_split(line, ' ');
-		if (ft_strcmp(lines[0], "env") == 0)
-			env(envp);
-		else if (ft_strcmp(lines[0], "pwd") == 0)
-			pwd();
-		else if (ft_strcmp(lines[0], "cd") == 0)
-			cd(lines);
-		else
-			printf("[ERROR] Comman not found\n");
-		add_history(line);
-		free(line);
-		free_split(lines);
+		printf("here i'm\n");
+		set_env(proc);
 	}
 }

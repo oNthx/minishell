@@ -6,7 +6,7 @@
 /*   By: bozgur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:14:26 by bozgur            #+#    #+#             */
-/*   Updated: 2022/08/24 14:14:28 by bozgur           ###   ########.fr       */
+/*   Updated: 2022/08/28 13:55:35 by bozgur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char	*ft_strncpy(char *dst, const char *src, size_t n);
 int		ft_atoi(const char *str);
 void	*ft_calloc(size_t count, size_t size);
-int	ft_strcmp(const char *s1, const char *s2);
+int		ft_strcmp(const char *s1, const char *s2);
 char	*ft_strdup(const char *s1);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, const char *s2);
 char	*ft_strtrim(const char *s1, char const *set);
 char	**ft_split(char const *s, char c);
-void	frees_plit(char **line);
+void	free_split(char **line);
 char	*ft_itoa(int n);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
