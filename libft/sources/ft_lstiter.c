@@ -5,21 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bozgur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/31 03:04:47 by bozgur            #+#    #+#             */
-/*   Updated: 2022/07/31 03:04:48 by bozgur           ###   ########.fr       */
+/*   Created: 2022/02/03 05:43:57 by bozgur            #+#    #+#             */
+/*   Updated: 2022/02/03 05:48:07 by bozgur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstiter(t_list *lst, void (*f)(void *))
+void	ft_lstiter(t_list	*lst, void (*f) (void *))
 {
 	if (!lst || !f)
 		return ;
-	while (lst->next)
+	while (lst)
 	{
 		f(lst->content);
 		lst = lst->next;
 	}
-	f(lst->content);
 }

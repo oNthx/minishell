@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bozgur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/31 03:01:49 by bozgur            #+#    #+#             */
-/*   Updated: 2022/07/31 03:01:50 by bozgur           ###   ########.fr       */
+/*   Created: 2022/01/11 19:26:49 by bozgur            #+#    #+#             */
+/*   Updated: 2022/01/11 20:16:00 by bozgur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,5 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	unsigned char	*tmp;
-
-	tmp = (unsigned char *)s;
-	while (n--)
-		tmp[n] = 0;
+	ft_memset(s, 0, n);
 }

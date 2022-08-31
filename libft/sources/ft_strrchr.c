@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bozgur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/31 03:12:11 by bozgur            #+#    #+#             */
-/*   Updated: 2022/07/31 03:12:13 by bozgur           ###   ########.fr       */
+/*   Created: 2022/01/12 20:17:19 by bozgur            #+#    #+#             */
+/*   Updated: 2022/01/13 03:35:40 by bozgur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	const char	*res;
+	size_t	index;
 
-	res = 0;
-	while (*s)
+	index = 0;
+	while (s[index])
+		index++;
+	index++;
+	while (index--)
 	{
-		if (*s == (char)c)
-			res = s;
-		s++;
+		if (s[index] == (char)c)
+			return ((char *)s + index);
 	}
-	if (*s == (char)c)
-		res = s;
-	return ((char *)res);
+	return (0);
 }

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bozgur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/31 03:05:35 by bozgur            #+#    #+#             */
-/*   Updated: 2022/07/31 03:05:39 by bozgur           ###   ########.fr       */
+/*   Created: 2022/02/02 11:31:57 by bozgur            #+#    #+#             */
+/*   Updated: 2022/02/02 11:32:19 by bozgur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,13 @@
 
 int	ft_lstsize(t_list *lst)
 {
-	int	count;
+	int	size;
 
-	count = 0;
-	if (!lst)
-		return (count);
-	while (lst->next)
+	size = 0;
+	while (lst)
 	{
-		count++;
 		lst = lst->next;
+		size++;
 	}
-	return (++count);
+	return (size);
 }

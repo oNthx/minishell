@@ -31,7 +31,7 @@ PACKAGE_TARNAME = readline
 srcdir = .
 
 top_srcdir = .
-BUILD_DIR = /Users/bozgur/trytoshell/lib/readline
+BUILD_DIR = /Users/bozgur/minishell/lib/readline
 
 INSTALL = /usr/bin/install -c
 INSTALL_PROGRAM = ${INSTALL}
@@ -48,7 +48,7 @@ MV = mv
 
 SHELL = /bin/sh
 
-prefix = /Users/bozgur/trytoshell/lib/readline
+prefix = /usr/local
 exec_prefix = ${prefix}
 
 datarootdir = ${prefix}/share

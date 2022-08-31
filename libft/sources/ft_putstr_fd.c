@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bozgur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/31 03:09:10 by bozgur            #+#    #+#             */
-/*   Updated: 2022/07/31 03:09:12 by bozgur           ###   ########.fr       */
+/*   Created: 2022/01/24 07:12:00 by bozgur            #+#    #+#             */
+/*   Updated: 2022/01/27 12:01:33 by bozgur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	if (!s || fd < 0)
+	int	index;
+
+	index = 0;
+	if (!s)
 		return ;
-	while (*s)
-		write(fd, s++, 1);
+	while (s[index])
+		write(fd, &s[index++], 1);
 }

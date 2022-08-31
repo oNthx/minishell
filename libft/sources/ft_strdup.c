@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bozgur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/31 03:10:11 by bozgur            #+#    #+#             */
-/*   Updated: 2022/07/31 03:10:13 by bozgur           ###   ########.fr       */
+/*   Created: 2022/01/16 16:11:12 by bozgur            #+#    #+#             */
+/*   Updated: 2022/02/16 01:58:05 by bozgur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,16 @@
 
 char	*ft_strdup(const char *s1)
 {
-	int		len;
-	int		index;
-	char	*res;
+	char	*str;
+	size_t	len;
 
+	len = ft_strlen(s1);
+	str = (char *)malloc((len + 1) * sizeof(char));
+	if (!str)
+		return (0);
 	len = 0;
-	index = 0;
-	while (s1[len])
-		len++;
-	res = (char *)malloc((len + 1) * sizeof(char));
-	if (!res)
-		return (res);
 	while (*s1)
-		res[index++] = *s1++;
-	res[index] = '\0';
-	return (res);
+		str[len++] = *s1++;
+	str[len] = 0;
+	return (str);
 }

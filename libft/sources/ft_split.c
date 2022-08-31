@@ -5,75 +5,55 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bozgur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/31 03:09:27 by bozgur            #+#    #+#             */
-/*   Updated: 2022/07/31 03:09:28 by bozgur           ###   ########.fr       */
+/*   Created: 2022/01/31 18:16:11 by bozgur            #+#    #+#             */
+/*   Updated: 2022/06/30 21:53:46 by bozgur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	**zero_list(void)
+char	word_count(char const *s, char c)
 {
-	char	**result;
-
-	result = (char **)malloc(sizeof(char *));
-	if (!result)
-		return (0);
-	*result = 0;
-	return (result);
-}
-
-size_t	dlm_count(char const *str, char c)
-{
-	size_t	count;
+	int	count;
 
 	count = 0;
-	while (*str)
+	if (!s)
+		return (0);
+	while (*s)
 	{
-		while (*str && *str == c)
-			str++;
-		count += *str != 0;
-		while (*str && *str != c)
-			str++;
+		while (*s && *s == c)
+			s++;
+		count += !!*s;
+		while (*s && *s != c)
+			s++;
 	}
 	return (count);
 }
 
-size_t	strlenchr(char const *str, char c)
-{
-	size_t	len;
-
-	len = 0;
-	while (str[len] && str[len] != c)
-		len++;
-	return (len);
-}
-
 char	**ft_split(char const *s, char c)
 {
-	size_t	index;
-	size_t	el_size;
 	char	**result;
+	int		index;
+	int		count;
+	int		rescount;
 
-	if (!s || !*s)
-		return (zero_list());
-	result = (char **)malloc(sizeof(char *) * (dlm_count(s, c) + 1));
-	if (!result)
-		return (result);
+	rescount = 0;
 	index = 0;
-	while (*s)
+	result = (char **)malloc((word_count(s, c) + 1) * sizeof(char *));
+	if (!result)
+		return (0);
+	while (rescount < word_count(s, c))
 	{
-		while (*s == c)
-			s++;
-		el_size = strlenchr(s, c);
-		if (el_size)
+		count = 0;
+		while (s[index] && s[index] == c)
+			index++;
+		while (s[index] && s[index] != c)
 		{
-			result[index++] = ft_substr(s, 0, el_size);
-			if (!result[index - 1])
-				return (0);
+			index++;
+			count++;
 		}
-		s += el_size;
+		result[rescount++] = ft_substr(s, index - count, count);
 	}
-	result[index] = 0;
+	result[rescount] = 0;
 	return (result);
 }

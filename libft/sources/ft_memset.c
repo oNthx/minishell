@@ -5,23 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bozgur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/31 03:06:39 by bozgur            #+#    #+#             */
-/*   Updated: 2022/07/31 03:06:40 by bozgur           ###   ########.fr       */
+/*   Created: 2022/01/11 16:46:21 by bozgur            #+#    #+#             */
+/*   Updated: 2022/01/12 03:18:19 by bozgur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memset(void *b, int c, size_t len)
+void	*ft_memset(void	*b, int c, size_t len)
 {
-	char	*tmp;
-	size_t	i;
+	unsigned char	*str;
+	size_t			strlen;
 
-	if (!b)
-		return ((void *)0);
-	i = 0;
-	tmp = (char *)b;
-	while (i < len)
-		tmp[i++] = c;
-	return (b);
+	strlen = 0;
+	str = (unsigned char *)b;
+	while (strlen < len)
+		str[strlen++] = c;
+	return (str);
 }

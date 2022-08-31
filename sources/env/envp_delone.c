@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   envp_add_back.c                                    :+:      :+:    :+:   */
+/*   envp_clear.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bozgur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/27 11:47:11 by bozgur            #+#    #+#             */
-/*   Updated: 2022/08/27 18:53:44 by bozgur           ###   ########.fr       */
+/*   Created: 2022/08/31 20:11:19 by bozgur            #+#    #+#             */
+/*   Updated: 2022/08/31 20:14:49 by bozgur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../inc/minishell.h"
+#include <minishell.h>
 
-void	envp_add_back(t_envp **lst, t_envp *new)
+void	envp_delone(t_envp *data)
 {
-	t_envp	*item;
-
-	if (!lst)
+	if (!data)
 		return ;
-	if (!*lst)
-	{
-		*lst = new;
-		return ;
-	}
-	item = *lst;
-	while (item->next)
-		item = item->next;
-	item->next = new;
+	free(data->key);
+	free(data->value);
+	free(data->fullstr);
+	free(data);
 }

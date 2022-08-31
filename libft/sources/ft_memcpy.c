@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bozgur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/31 03:06:15 by bozgur            #+#    #+#             */
-/*   Updated: 2022/07/31 03:06:19 by bozgur           ###   ########.fr       */
+/*   Created: 2022/01/11 20:42:18 by bozgur            #+#    #+#             */
+/*   Updated: 2022/01/27 15:07:09 by bozgur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,16 @@
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	char		*d;
-	const char	*s;
+	size_t		i;
+	char		*dst_1;
+	const char	*src_1;
 
-	if (dst == src || !n)
-		return (dst);
-	d = (char *)dst;
-	s = (const char *)src;
-	while (n--)
-		d[n] = s[n];
+	dst_1 = (char *)dst;
+	src_1 = (const char *)src;
+	i = 0;
+	if (!dst && !src)
+		return (0);
+	while (i++ < n)
+		*dst_1++ = *src_1++;
 	return (dst);
 }

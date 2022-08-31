@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bozgur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/31 03:02:29 by bozgur            #+#    #+#             */
-/*   Updated: 2022/07/31 03:02:29 by bozgur           ###   ########.fr       */
+/*   Created: 2022/01/11 14:06:04 by bozgur            #+#    #+#             */
+/*   Updated: 2022/01/12 03:07:41 by bozgur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 int	ft_isalnum(int c)
 {
-	return (ft_isdigit(c) || ft_isalpha(c));
+	return (ft_isalpha(c) || ft_isdigit(c));
 }

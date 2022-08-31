@@ -5,48 +5,55 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bozgur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/31 03:03:47 by bozgur            #+#    #+#             */
-/*   Updated: 2022/07/31 03:03:49 by bozgur           ###   ########.fr       */
+/*   Created: 2022/01/23 23:59:35 by bozgur            #+#    #+#             */
+/*   Updated: 2022/06/30 21:52:57 by bozgur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_digit_count(int n)
+void	ft_swap(char *s, char *n)
 {
-	int	digit;
+	char	swap;
 
-	digit = !n;
-	while (n)
-	{
-		n /= 10;
-		digit++;
-	}
-	return (digit);
+	swap = *s;
+	*s = *n;
+	*n = swap;
+}
+
+void	ft_reverse(char *s)
+{
+	int		len;
+	int		index;
+	int		count;
+
+	index = *s == '-';
+	len = ft_strlen(s);
+	count = len / 2;
+	while (count--)
+		ft_swap(s + index++, s + --len);
 }
 
 char	*ft_itoa(int n)
 {
-	int		sign;
-	int		d_count;
 	char	*result;
+	int		index;
+	int		sign;
 
-	sign = n < 0;
-	d_count = ft_digit_count(n) + sign;
-	result = (char *)malloc(sizeof(char) * (d_count + 1));
+	index = 0;
+	sign = 1 - (n < 0) * 2;
+	if (!n)
+		return (ft_strdup("0"));
+	result = (char *)malloc((11) * sizeof(char));
 	if (!result)
-		return (result);
-	result[d_count] = 0;
-	if (sign)
+		return (0);
+	*result = (sign < 0 && !index++) * '-';
+	while (n)
 	{
-		*result = '-';
-		result[--d_count] = -(n % 10) + '0';
-		n = -(n / 10);
-	}
-	while (d_count-- - sign)
-	{
-		result[d_count] = n % 10 + '0';
+		result[index++] = n % 10 * sign + '0';
 		n /= 10;
 	}
+	result[index] = 0;
+	ft_reverse(result);
 	return (result);
 }

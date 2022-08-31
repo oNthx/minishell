@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   envp_delone.c                                      :+:      :+:    :+:   */
+/*   envp_clear.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bozgur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/27 12:17:55 by bozgur            #+#    #+#             */
-/*   Updated: 2022/08/27 18:58:55 by bozgur           ###   ########.fr       */
+/*   Created: 2022/08/31 20:15:12 by bozgur            #+#    #+#             */
+/*   Updated: 2022/08/31 20:18:48 by bozgur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	envp_delone(t_envp *envp, void (*del)(void *))
+void	envp_clear(t_envp *data)
 {
-	if (!envp)
-		return ;
-	del(envp->key);
-	del(envp->value);
-	del(envp->fullstr);
-	free(envp);
+	t_envp	*tmp;
+
+	while (data)
+	{
+		tmp = data->next;
+		free(data->key);
+		free(data->value);
+		free(data->fullstr);
+		free(data);
+		data = tmp;
+	}
 }

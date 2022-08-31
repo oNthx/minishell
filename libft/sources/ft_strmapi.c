@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bozgur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/31 03:11:33 by bozgur            #+#    #+#             */
-/*   Updated: 2022/07/31 03:11:35 by bozgur           ###   ########.fr       */
+/*   Created: 2022/01/24 06:18:38 by bozgur            #+#    #+#             */
+/*   Updated: 2022/01/31 16:41:10 by bozgur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	int		len;
-	char	*result;
+	char	*new;
+	int		index;
 
-	if (!s)
-		return (ft_strdup(""));
-	if (!f)
-		return (ft_strdup(s));
-	len = ft_strlen(s);
-	result = (char *)malloc(sizeof(char) * (len + 1));
-	if (!result)
-		return (result);
-	result[len] = 0;
-	while (len--)
-		result[len] = f(len, s[len]);
-	return (result);
+	index = 0;
+	if (!s || !f)
+		return (0);
+	new = ft_strdup(s);
+	if (!new)
+		return (0);
+	while (*s)
+	{
+		new[index] = f(index, *s++);
+		index++;
+	}
+	return (new);
 }

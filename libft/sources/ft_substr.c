@@ -5,34 +5,30 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bozgur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/31 03:12:48 by bozgur            #+#    #+#             */
-/*   Updated: 2022/07/31 03:12:49 by bozgur           ###   ########.fr       */
+/*   Created: 2022/01/19 23:03:08 by bozgur            #+#    #+#             */
+/*   Updated: 2022/01/29 03:34:29 by bozgur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "libft.h"
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t	index;
-	size_t	s_len;
-	size_t	sub_len;
-	char	*substr;
+	size_t		size;
+	char		*str;
 
-	if (!s)
-		return (0);
-	s_len = ft_strlen(s);
-	if (s_len <= start)
+	size = 0;
+	if (!s || !len || ft_strlen(s) <= start)
 		return (ft_strdup(""));
-	sub_len = s_len - start;
-	if (sub_len > len)
-		sub_len = len;
-	substr = (char *)malloc(sizeof(char) * (sub_len + 1));
-	if (!substr)
-		return (substr);
-	index = 0;
-	while (index < sub_len)
-		substr[index++] = s[start++];
-	substr[index] = '\0';
-	return (substr);
+	while (s[start + size] && size < len)
+		size++;
+	str = (char *)malloc((size + 1) * sizeof(char));
+	if (!str)
+		return (0);
+	size = 0;
+	while (s[start] && size < len)
+		str[size++] = s[start++];
+	str[size] = 0;
+	return (str);
 }

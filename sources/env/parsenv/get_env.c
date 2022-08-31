@@ -5,25 +5,29 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bozgur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/27 22:26:47 by bozgur            #+#    #+#             */
-/*   Updated: 2022/08/28 11:22:59 by bozgur           ###   ########.fr       */
+/*   Created: 2022/08/31 21:36:49 by bozgur            #+#    #+#             */
+/*   Updated: 2022/08/31 22:27:00 by bozgur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-t_envp	*get_env(char **envl, t_envp *data)
+t_envp	*get_env(t_envp *envl, char *key)
 {
-	int		idx;
 	t_envp	*tmp;
 
-	idx = 0;
-	data = envp_new(envl[idx]);
-	tmp = data;
-	while (envl[++idx])
+	if (!envl)
+		return (0);
+	tmp  = envl;
+	while (tmp->next)
 	{
-		tmp->next = envp_new(envl[idx]);
+		if (!ft_strcmp(tmp->key, key))
+		{
+			printf("aaaaa == %s\n", tmp->value);
+			return (tmp);
+		}
 		tmp = tmp->next;
 	}
-	return (data);
+	printf("aaaaa == %s\n", tmp->value);
+	return (0);
 }

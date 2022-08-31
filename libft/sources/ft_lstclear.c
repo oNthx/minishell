@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bozgur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/31 03:04:22 by bozgur            #+#    #+#             */
-/*   Updated: 2022/07/31 03:04:24 by bozgur           ###   ########.fr       */
+/*   Created: 2022/02/03 02:15:36 by bozgur            #+#    #+#             */
+/*   Updated: 2022/02/03 03:29:12 by bozgur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
 	t_list	*tmp;
 
-	if (!del || !lst || !*lst)
-		return ;
 	while (*lst)
 	{
 		tmp = (*lst)->next;

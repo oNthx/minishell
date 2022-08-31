@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bozgur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/31 03:04:11 by bozgur            #+#    #+#             */
-/*   Updated: 2022/07/31 03:04:13 by bozgur           ###   ########.fr       */
+/*   Created: 2022/02/02 07:05:07 by bozgur            #+#    #+#             */
+/*   Updated: 2022/02/03 01:35:11 by bozgur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {
+	if (!lst || !new)
+		return ;
+	if (!*lst)
+	{
+		*lst = new;
+		return ;
+	}
 	new->next = *lst;
 	*lst = new;
 }

@@ -5,21 +5,22 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bozgur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/27 11:52:30 by bozgur            #+#    #+#             */
-/*   Updated: 2022/08/27 18:54:12 by bozgur           ###   ########.fr       */
+/*   Created: 2022/08/31 18:07:00 by bozgur            #+#    #+#             */
+/*   Updated: 2022/08/31 20:10:44 by bozgur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../inc/minishell.h"
+#include <minishell.h>
 
-void	envp_add_front(t_envp **lst, t_envp *new)
+void	envp_add_front(t_envp **data, t_envp *new)
 {
-	if (!lst)
+	if (!data || !new)
 		return ;
-	if (!*lst)
+	if (!*data)
 	{
-		*lst = new;
+		*data = new;
 		return ;
 	}
-	envp_add_back(&new, *lst);
+	new->next = *data;
+	*data = new;
 }

@@ -5,75 +5,87 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bozgur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/31 02:58:28 by bozgur            #+#    #+#             */
-/*   Updated: 2022/07/31 02:58:30 by bozgur           ###   ########.fr       */
+/*   Created: 2022/02/16 01:44:38 by bozgur            #+#    #+#             */
+/*   Updated: 2022/02/23 03:08:14 by bozgur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #ifndef BUFFER_SIZE
-# define BUFFER_SIZE 42
+# define BUFFER_SIZE 1
 #endif
 
-static void	*ft_clear_backup(char **backup)
+char	*ft_strncpy(char *dst, const char *src, size_t n)
 {
-	free(*backup);
-	*backup = NULL;
-	return (*backup);
-}
+	size_t	index;
 
-static char	*ft_init_string(char **backup)
-{
-	char	*last_char;
-	char	*result;
-	size_t	backup_leng;
-
-	if (!*backup)
-		return (*backup);
-	backup_leng = ft_strlen_gnl(*backup);
-	if (!backup_leng)
-		return (ft_clear_backup(backup));
-	last_char = ft_strchr_gnl(*backup, '\n');
-	if (!last_char)
+	index = 0;
+	if (!n || !src)
+		return (dst);
+	while (src[index] && index < n)
 	{
-		result = ft_substr_gnl(*backup, 0, backup_leng);
-		**backup = 0;
-		return (result);
+		dst[index] = src[index];
+		index++;
 	}
-	result = ft_substr_gnl(*backup, 0, last_char - *backup + 1);
-	ft_strncpy_gnl(*backup, last_char + 1, backup_leng);
-	return (result);
+	while (index <= n)
+	{
+		dst[index] = 0;
+		index++;
+	}
+	return (dst);
 }
 
-static char	*ft_update(char **backup, char *str)
+static void	merge(char **buffer, char *rd_buf)
 {
-	char	*old_slice;
+	char	*tmp;
 
-	old_slice = *backup;
-	*backup = ft_strjoin_gnl(*backup, str);
-	if (old_slice)
-		free(old_slice);
-	return (*backup);
+	tmp = *buffer;
+	*buffer = ft_strjoin(*buffer, rd_buf);
+	free(tmp);
+}
+
+static char	*get_line(char **buffer)
+{
+	char	*line;
+	char	*buf;
+	int		len;
+
+	if (!buffer || !*buffer)
+		return (0);
+	if (!**buffer)
+	{
+		free(*buffer);
+		*buffer = 0;
+		return (0);
+	}
+	buf = *buffer;
+	len = 0;
+	while (*buf && ++len && *buf++ != '\n')
+		;
+	line = (char *)malloc((len + 1) * sizeof(char));
+	if (!line)
+		return (0);
+	ft_strncpy(line, *buffer, len);
+	ft_strncpy(*buffer, *buffer + len, ft_strlen(*buffer));
+	return (line);
 }
 
 char	*get_next_line(int fd)
 {
-	char		*result;
-	static char	*backup[1024];
-	char		slice[BUFFER_SIZE + 1];
-	int			read_bytes;
+	static char	*result;
+	char		buffer[BUFFER_SIZE + 1];
+	int			readbyte;
 
-	read_bytes = 1;
-	result = 0;
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (result);
-	while (read_bytes && !ft_strchr_gnl(backup[fd], '\n'))
+	*buffer = 0;
+	while (!ft_strchr(result, '\n'))
 	{
-		read_bytes = read(fd, slice, BUFFER_SIZE);
-		slice[read_bytes] = '\0';
-		if (read_bytes < 0 || !ft_update(&backup[fd], slice))
-			return (ft_clear_backup(&backup[fd]));
+		readbyte = read(fd, buffer, BUFFER_SIZE);
+		if (readbyte == -1)
+			return (0);
+		if (!readbyte)
+			break ;
+		buffer[readbyte] = 0;
+		merge(&result, buffer);
 	}
-	result = ft_init_string(&backup[fd]);
-	return (result);
+	return (get_line(&result));
 }

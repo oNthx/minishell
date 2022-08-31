@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncpy.c                                       :+:      :+:    :+:   */
+/*   envp_add_back.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bozgur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/24 14:13:14 by bozgur            #+#    #+#             */
-/*   Updated: 2022/08/24 14:13:14 by bozgur           ###   ########.fr       */
+/*   Created: 2022/08/31 18:11:20 by bozgur            #+#    #+#             */
+/*   Updated: 2022/08/31 20:10:55 by bozgur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <minishell.h>
 
-char	*ft_strncpy(char *dst, const char *src, size_t n)
+void	envp_add_back(t_envp **data, t_envp *new)
 {
-	size_t	idx;
+	t_envp	*tmp;
 
-	idx = 0;
-	if (!n || !src)
-		return (0);
-	while (*src && idx < n)
-		dst[idx++] = *src++;
-	while (idx <= n)
-		dst[idx++] = 0;
-	return (dst);
+	if (!data || !new)
+		return ;
+	if (!*data)
+	{
+		*data = new;
+		return ;
+	}
+	tmp = *data;
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = new;
 }

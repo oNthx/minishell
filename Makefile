@@ -1,55 +1,37 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: bozgur <marvin@42.fr>                      +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/08/27 15:18:38 by bozgur            #+#    #+#              #
-#    Updated: 2022/08/27 18:56:37 by bozgur           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+SRC	= $(shell find sources -name \*.c)
+OBJ	= $(patsubst %.c, %.o, $(SRC))
 
-SRCS	= $(shell find sources -type f -name "*.c")
-OBJS	= $(SRCS:sources/%.c=sources/%.o)
+NAME		= minihsell
+CC			= gcc
+RM			= rm -f
+FLS			= -Wall -Werror -Wextra -I./lib/readline/include
+LDFLAGS		= -L./lib/readline/lib -lreadline
+LIBFT		= ./libft/libft.a
 
-INC_FT	= ./libft/sources
-INC_GN	= ./libft/GNL/sources
-INC_PR	= ./libft/ft_printf/sources
+INC_FT		= ./libft/sources
+INC_GN		= ./libft/GNL/sources
+INC_PR		= ./libft/ft_printf/sources
+INC			= ./inc/
+LIB			= ./lib/.minishell
 
-CC		= gcc
-RM		= rm -rf
-CFLS	= -Wall -Werror -Wextra -I./inc
-LDFLGS	= -L./lib/readline/lib -lreadline
-LIBFT	= ./libft/libft.a
-INC		= ./inc
-NAME	= minishell
-
-SRC		= sources/
-
-all:	$(LIBFT) $(NAME)
+all: $(LIB) $(LIBFT) $(NAME)
 
 $(LIBFT):
-	make -C ./libft
+	@make -C ./libft
 
-$(SRC)%.o: $(SRC)%.c
-	$(CC) $(CFLS) -c $< -o $@ -I$(INC) -I$(INC_FT) -I$(INC_GN) -I$(INC_PR)
+$(LIB):
+	@make -C ./lib
 
-$(NAME): $(OBJS)
-	@$(CC) $(OBJS) $(LDFLGS) $(LIBFT)
+.c.o:
+	@$(CC) $(FLS) -c $< -o $@ -I$(INC_PR) -I$(INC_GN) -I$(INC_FT) -I$(INC)
+
+$(NAME): $(OBJ)
+	$(CC) $(OBJ) $(LDFLAGS) -o $(NAME) $(LIBFT)
 
 clean:
-	@$(RM) $(OBJS)
+	$(RM) $(OBJ)
 
 fclean: clean
 	$(RM) $(NAME)
 
-ffclean: fclean
-	@make fclean -C ./libft
-
-re: ffclean all
-
-run: $(NAME)
-	@./$(NAME)
-
-.PHONY: all clean fclean re run
+re: fclean all

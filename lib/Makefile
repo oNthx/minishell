@@ -5,33 +5,30 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bozgur <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/07/31 03:01:24 by bozgur            #+#    #+#              #
-#    Updated: 2022/08/21 23:56:57 by bozgur           ###   ########.fr        #
+#    Created: 2022/08/31 15:18:37 by bozgur            #+#    #+#              #
+#    Updated: 2022/08/31 15:25:59 by bozgur           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC		= $(wildcard *.c)
+DIR		= $(shell echo $(PWD))
+RM		= rm -rf
 
-OBJ 	=	$(SRC:.c=.o)
+LIB		= ./.minishell
 
-CC  	=	gcc
-RM		=	rm -f
-AR		= 	ar -rcs
-FLS 	=	-Wall -Wextra -Werror
-NAME	=	libft.a
+all: $(LIB)
 
-all: $(NAME)
-
-$(NAME):
-	@$(CC) -c $(FLS) $(SRC)
-	@$(AR) $(NAME) $(OBJ)
-
-clean:
-	@$(RM) $(OBJ)
-
-fclean: clean
-	@$(RM) $(NAME)
+fclean:
+	@$(RM) ./readline $(LIB)
 
 re: fclean all
 
-.PHONY: all $(NAME) clean fclean re
+$(LIB):
+	@curl -O http://ftp.gnu.org/gnu/readline/readline-8.2-rc1.tar.gz
+	@gunzip -c readline-8.2-rc1.tar.gz | tar xopf -
+	@mv readline-8.2-rc1 readline
+	/bin/sh -c "cd readline && sh ./configure --prefix=$(DIR)/readline"
+	make install -C readline
+	@rm -f readline-8.2-rc1.tar.gz
+	@mkdir $(LIB)
+
+.PHONY: all fclean re

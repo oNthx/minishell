@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   is_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bozgur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/28 01:59:42 by bozgur            #+#    #+#             */
-/*   Updated: 2022/08/28 02:33:10 by bozgur           ###   ########.fr       */
+/*   Created: 2022/08/31 20:22:51 by bozgur            #+#    #+#             */
+/*   Updated: 2022/08/31 20:29:22 by bozgur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-char	*pwd()
+int	is_builtin(char *line)
 {
-	return (getcwd(0, 0));
+	return (!ft_strcmp(line, "cd") || !ft_strcmp(line, "echo") || \
+		!ft_strcmp(line, "pwd") || !ft_strcmp(line, "export") || \
+		!ft_strcmp(line, "env") || !ft_strcmp(line, "exit") || \
+		!ft_strcmp(line, "unset"));
 }

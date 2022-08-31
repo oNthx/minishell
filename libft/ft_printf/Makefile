@@ -1,39 +1,27 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: bozgur <marvin@42.fr>                      +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/07/31 02:59:59 by bozgur            #+#    #+#              #
-#    Updated: 2022/07/31 03:00:00 by bozgur           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+SRC = 	libftprintf.c		\
+		ft_printf_utils.c	
 
-SRCS	= $(wildcard sources/*.c)
-OBJS	= $(SRCS:.c=.o)
-
-NAME	= libftprintf.a
+OBJ 	= $(SRC:.c=.o)
 CC		= gcc
+CFLAGS	= -Wall -Werror -Wextra
 RM		= rm -f
-CFLAGS	= -Wall -Wextra -Werror 
+AR		= ar -rcs
+NAME	= libftprintf.a
 
+all: $(NAME)
 
-all :  ${NAME}
+$(NAME): $(OBJ)
+	@$(AR) $(NAME) $(OBJ)
 
-$(NAME) : ${OBJS}
-	ar rc $(NAME) $(OBJS)
-	ranlib $(NAME)
+.c.o:
+	@$(CC) $(CFLAGS) -c $< -o $@
 
-.c.o : 
-	${CC} ${CFLAGS} -c $< -o $@ 
+clean:
+	@$(RM) $(OBJ)
 
-clean :
-	${RM} ${OBJS}
+fclean: clean
+	@$(RM) $(NAME)
 
-fclean : clean
-	${RM} ${NAME}
+re: fclean all
 
-re : fclean all
-
-.PHONY: all clean fclean re .c.o bonus
+.PHONY: all $(NAME) clean fclean re

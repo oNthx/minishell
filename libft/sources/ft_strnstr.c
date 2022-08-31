@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bozgur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/31 03:11:58 by bozgur            #+#    #+#             */
-/*   Updated: 2022/07/31 03:11:59 by bozgur           ###   ########.fr       */
+/*   Created: 2022/01/16 16:04:25 by bozgur            #+#    #+#             */
+/*   Updated: 2022/01/16 16:08:04 by bozgur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	size_t	index;
-	size_t	jndex;
+	size_t	n;
+	size_t	i;
 
-	jndex = 0;
+	i = 0;
+	n = 0;
 	if (!*needle)
 		return ((char *)haystack);
-	while (*haystack && jndex < len)
+	while (*haystack && i < len)
 	{
-		index = 0;
-		while (needle[index] && haystack[index] == needle[index]
-			&& ((jndex + index) < len))
-			index++;
-		if (!needle[index])
+		n = 0;
+		while (needle[n] && haystack[n] == needle[n] && n + i < len)
+			n++;
+		if (!needle[n])
 			return ((char *)haystack);
-		jndex++;
 		haystack++;
+		i++;
 	}
 	return (0);
 }

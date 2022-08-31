@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bozgur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/31 03:06:03 by bozgur            #+#    #+#             */
-/*   Updated: 2022/07/31 03:06:04 by bozgur           ###   ########.fr       */
+/*   Created: 2022/01/13 13:40:55 by bozgur            #+#    #+#             */
+/*   Updated: 2022/01/27 15:24:43 by bozgur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,17 @@
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	const unsigned char	*s1_t;
-	const unsigned char	*s2_t;
+	unsigned char	*s1_1;
+	unsigned char	*s2_1;
 
+	s1_1 = (unsigned char *)s1;
+	s2_1 = (unsigned char *)s2;
+	while (*s1_1 == *s2_1 && n-- -1)
+	{
+		s1_1++;
+		s2_1++;
+	}
 	if (!n)
 		return (0);
-	s1_t = (const unsigned char *)s1;
-	s2_t = (const unsigned char *)s2;
-	while (*s1_t++ == *s2_t++ && n - 1)
-		n--;
-	return (*--s1_t - *--s2_t);
+	return (*s1_1 - *s2_1);
 }

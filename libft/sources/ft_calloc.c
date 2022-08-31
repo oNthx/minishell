@@ -5,25 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bozgur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/31 03:01:59 by bozgur            #+#    #+#             */
-/*   Updated: 2022/07/31 03:02:00 by bozgur           ###   ########.fr       */
+/*   Created: 2022/01/14 18:33:29 by bozgur            #+#    #+#             */
+/*   Updated: 2022/01/27 08:12:48 by bozgur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc(size_t count, size_t size)
+void	*ft_calloc(size_t size, size_t count)
 {
-	size_t			index;
-	void			*result;
-	unsigned char	*temp;
+	char	*num;
 
-	index = 0;
-	result = malloc(count * size);
-	if (!result)
+	num = (char *)malloc(size * count);
+	if (!num)
 		return (0);
-	temp = (unsigned char *)result;
-	while (index < (count * size))
-		temp[index++] = 0;
-	return (result);
+	ft_bzero(num, size * count);
+	return (num);
 }

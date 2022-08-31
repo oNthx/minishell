@@ -1,41 +1,29 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: bozgur <marvin@42.fr>                      +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/07/31 02:58:05 by bozgur            #+#    #+#              #
-#    Updated: 2022/07/31 02:58:06 by bozgur           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+SRC		= $(wildcard sources/*.c)
+OBJ		= $(patsubst %.c, %.o, $(SRC))
 
-SRCS			= $(wildcard sources/*.c)
-OBJS			= $(SRCS:.c=.o)
-NAME			= get_next_line.a
-CC				= gcc
-RM				= rm -f
-CFLAGS			= -Wall -Wextra -Werror
+NAME	= get_next_line.a
+CC		= gcc
+RM		= rm -rf
+FLGS	= -Wall -Werror -Wextra
 
-all : ${NAME}
+LIB		= ft_printf/libftprintf.a
 
-	
-$(NAME) : ${OBJS}
-	ar rc $(NAME) $(OBJS)
-	ranlib $(NAME)
+all: $(LIB) $(NAME)
 
-.c.o :
-	${CC} ${CFLAGS} -c $< -o $@
+$(LIB):
+	make -C ../ft_printf
 
-clean :
-	${RM} ${OBJS}
+$(NAME): $(OBJ)
+	@ar rc $(NAME) $(OBJ)
+	@ranlib $(NAME)
 
-fclean : clean
-	${RM} ${NAME}
+clean:
+	$(RM) $(OBJ)
 
-norm :
-	norminette sources/*.[ch]
+fclean: clean
+	@make fclean -C ../ft_printf
+	$(RM) $(NAME)
 
-re : fclean all
+re:	fclean all
 
-.PHONY: all clean fclean re .c.o
+.PHONY: all re clean fclean

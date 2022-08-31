@@ -5,19 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bozgur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/31 03:11:16 by bozgur            #+#    #+#             */
-/*   Updated: 2022/07/31 03:11:18 by bozgur           ###   ########.fr       */
+/*   Created: 2022/01/11 14:26:50 by bozgur            #+#    #+#             */
+/*   Updated: 2022/01/11 23:48:17 by bozgur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *str)
+size_t	ft_strlen(const char *s)
 {
-	const char	*tmp;
+	int	len;
 
-	tmp = str;
-	while (*tmp)
-		tmp++;
-	return (tmp - str);
+	len = 0;
+	while (*s++)
+		len++;
+	return (len);
 }

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bozgur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/31 03:06:58 by bozgur            #+#    #+#             */
-/*   Updated: 2022/07/31 03:07:03 by bozgur           ###   ########.fr       */
+/*   Created: 2022/01/24 08:23:33 by bozgur            #+#    #+#             */
+/*   Updated: 2022/01/27 12:01:51 by bozgur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 void	ft_putendl_fd(char *s, int fd)
 {
-	if (!s || fd < 0)
+	if (!s)
 		return ;
-	ft_putstr_fd(s, fd);
-	ft_putchar_fd('\n', fd);
+	while (*s)
+		write(fd, s++, 1);
+	write(fd, "\n", 1);
 }

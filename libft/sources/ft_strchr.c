@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bozgur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/31 03:09:56 by bozgur            #+#    #+#             */
-/*   Updated: 2022/07/31 03:09:58 by bozgur           ###   ########.fr       */
+/*   Created: 2022/01/12 19:42:48 by bozgur            #+#    #+#             */
+/*   Updated: 2022/01/13 03:24:44 by bozgur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,16 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	while (*s != (char)c && *s)
-		s++;
-	if (!*s && (char)c)
-		return (0);
-	return ((char *)s);
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == (char)c)
+			return ((char *)s + i);
+		i++;
+	}
+	if (s[i] == (char)c)
+		return ((char *)(s + i));
+	return (0);
 }

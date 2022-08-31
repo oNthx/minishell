@@ -21,7 +21,7 @@ RL_LIBRARY_VERSION = 8.2
 SHELL = /bin/sh
 RM = rm -f
 
-prefix = /Users/bozgur/trytoshell/lib/readline
+prefix = /usr/local
 exec_prefix = ${prefix}
 
 datarootdir = ${prefix}/share
@@ -32,7 +32,7 @@ datadir = ${datarootdir}
 
 top_srcdir = ..
 #BUILD_DIR = .
-BUILD_DIR = /Users/bozgur/trytoshell/lib/readline
+BUILD_DIR = /Users/bozgur/minishell/lib/readline
 installdir = $(datadir)/readline
 
 INSTALL = /usr/bin/install -c

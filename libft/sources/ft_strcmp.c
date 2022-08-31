@@ -5,16 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bozgur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/24 14:13:02 by bozgur            #+#    #+#             */
-/*   Updated: 2022/08/24 14:13:05 by bozgur           ###   ########.fr       */
+/*   Created: 2022/08/31 00:29:49 by bozgur            #+#    #+#             */
+/*   Updated: 2022/08/31 22:26:10 by bozgur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strcmp(const char *s1, const char *s2)
+int	ft_strcmp(char *s1, char *s2)
 {
-	if (*s1 && *s2)
+	if (s1 && s2)
 	{
 		while (*s1 && *s2 && (*s1 == *s2))
 		{

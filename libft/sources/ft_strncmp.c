@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bozgur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/31 03:11:47 by bozgur            #+#    #+#             */
-/*   Updated: 2022/07/31 03:11:48 by bozgur           ###   ########.fr       */
+/*   Created: 2022/01/13 05:23:15 by bozgur            #+#    #+#             */
+/*   Updated: 2022/01/13 05:23:53 by bozgur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	size_t	index;
-
-	index = 0;
-	while (s1[index] && s1[index] == s2[index] && index < n)
-		index++;
-	if (index == n)
+	if (!n)
 		return (0);
-	return ((unsigned char)s1[index] - (unsigned char)s2[index]);
+	while (*s2 && *s1 == *s2 && n-- - 1)
+	{
+		s1++;
+		s2++;
+	}
+	return ((unsigned char)*s1 - (unsigned char)*s2);
 }

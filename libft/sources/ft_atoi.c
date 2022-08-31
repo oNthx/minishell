@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bozgur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/31 03:01:39 by bozgur            #+#    #+#             */
-/*   Updated: 2022/07/31 03:01:40 by bozgur           ###   ########.fr       */
+/*   Created: 2022/01/16 16:05:31 by bozgur            #+#    #+#             */
+/*   Updated: 2022/01/30 05:46:16 by bozgur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,17 @@
 
 int	ft_atoi(const char *str)
 {
-	int	sign;
-	int	result;
+	size_t	res;
+	int		sign;
 
 	sign = 1;
-	result = 0;
-	while ((*str >= '\t' && *str <= '\r') || *str == ' ')
+	res = 0;
+	while ((*str >= 9 && *str <= 13) || *str == ' ')
 		str++;
 	if (*str == '-' || *str == '+')
-		sign -= (*str++ == '-') * 2;
-	while (ft_isdigit(*str))
-		result = *str++ - '0' + (result * 10);
-	return (result * sign);
+		if (*str++ == '-')
+			sign = -1;
+	while (*str >= '0' && *str <= '9')
+		res = ((*str++ - '0') + res * 10);
+	return (res * sign);
 }

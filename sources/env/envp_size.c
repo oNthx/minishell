@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   envp_size.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bozgur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/27 15:17:29 by bozgur            #+#    #+#             */
-/*   Updated: 2022/08/28 15:14:06 by bozgur           ###   ########.fr       */
+/*   Created: 2022/08/31 18:04:57 by bozgur            #+#    #+#             */
+/*   Updated: 2022/08/31 18:07:18 by bozgur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	main(int argc, char **argv, char **envl)
+int	envp_size(t_envp *data)
 {
-	t_envp		*data;
-	t_process	*proc;
+	int		size;
+	t_envp	*tmp;
 
-	printf("here i'm\n");
-	argc = (int)argc;
-	argv = (char **)argv;
-	proc = malloc(sizeof(t_process));
-	data = malloc(sizeof(t_envp));
-	proc->envp = data;
-	printf("here i'm\n");
-	get_env(envl, data);
-	printf("here i'm\n");
-	printf("data->key %s\n", data->key);
-	if (ft_strcmp(data->key, "PWD") == 0)
+	tmp = data;
+	size = 0;
+	while (tmp->next)
 	{
-		printf("here i'm\n");
-		set_env(proc);
+		size++;
+		tmp = tmp->next;
 	}
+	return (size);
 }

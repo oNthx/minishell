@@ -5,20 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bozgur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/31 03:05:52 by bozgur            #+#    #+#             */
-/*   Updated: 2022/07/31 03:05:54 by bozgur           ###   ########.fr       */
+/*   Created: 2022/01/12 05:22:33 by bozgur            #+#    #+#             */
+/*   Updated: 2022/01/12 10:45:38 by bozgur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "stdio.h"
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	const unsigned char	*temp;
+	const unsigned char	*tmp;
+	size_t				i;
 
-	temp = (const unsigned char *)s;
-	while (n--)
-		if (*temp++ == (unsigned char)c)
-			return ((void *)(--temp));
+	tmp = (const unsigned char *)s;
+	i = 0;
+	while (i < n)
+	{
+		if (tmp[i] == (const unsigned char)c)
+			return ((char *)(tmp + i));
+		i++;
+	}
 	return (0);
 }
